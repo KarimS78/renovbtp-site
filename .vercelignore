@@ -1,0 +1,11 @@
+# Le site vitrine est le seul contenu déployé (index.html + assets).
+# L'app devis/factures a son propre projet Vercel (renovbtp-factures).
+invoice-app
+
+# Documents de travail, non destinés au web
+A envoyer Karim
+*.pdf
+index.backup-*.html
+
+.claude
+node_modules

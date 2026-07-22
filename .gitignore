@@ -1,0 +1,11 @@
+.vercel
+.claude
+node_modules
+
+# L'app devis/factures a son propre repo (renovbtp-factures)
+invoice-app
+
+# Documents de travail, non destinés au web
+A envoyer Karim
+*.pdf
+index.backup-*.html
