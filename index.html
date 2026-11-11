@@ -169,6 +169,44 @@ h1 u::after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:.11e
 .vue figcaption small{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:#c5d3e6}
 .jauge{height:2px;background:var(--line-dark);margin:clamp(16px,2.4vh,28px) var(--pad) 0}
 .jauge i{display:block;height:100%;background:var(--amber);transform-origin:left;transform:scaleX(var(--g,0))}
+.ouvrir{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:flex-start;justify-content:flex-end;padding:14px;border-radius:4px}
+.ouvrir span{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.94);color:var(--marine-deep);font:600 .8rem var(--sans);padding:8px 14px;border-radius:999px;transition:background .3s,translate .4s var(--ease),opacity .3s}
+.ouvrir span::before{content:"+";font-size:1.05rem;line-height:1;color:var(--amber);font-weight:700}
+@media(hover:hover){.ouvrir span{opacity:0;translate:0 -6px}.vue:hover .ouvrir span,.ouvrir:focus-visible span{opacity:1;translate:none}}
+.ouvrir:hover span{background:#fff}
+
+/* fiche chantier */
+html.fige{overflow:hidden}
+.fiche{border:0;padding:0;margin:auto;width:min(1320px,calc(100vw - 40px));height:min(820px,calc(100svh - 40px));max-width:none;max-height:none;border-radius:10px;overflow:hidden;background:#fff;color:var(--marine-deep);box-shadow:0 50px 120px -30px rgba(8,16,30,.7)}
+.fiche::backdrop{background:rgba(12,22,40,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.fiche[open]{display:grid;grid-template-columns:1.55fr 1fr;animation:monteFiche .5s var(--ease)}
+@keyframes monteFiche{from{opacity:0;transform:translateY(24px) scale(.985)}}
+.scene{position:relative;background:var(--marine-deep);min-height:0;min-width:0}
+.bande{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.bande::-webkit-scrollbar{display:none}
+.bande figure{position:relative;flex:none;width:100%;height:100%;scroll-snap-align:center;--b:clamp(12px,2vw,28px)}
+.bande img{position:absolute;top:var(--b);left:var(--b);width:calc(100% - 2*var(--b));height:calc(100% - var(--b) - 60px);object-fit:contain}
+.fleche{position:absolute;top:50%;translate:0 -50%;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--marine-deep);font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .3s,scale .3s var(--ease)}
+.fleche:hover{background:var(--amber);scale:1.06}
+.fleche.g{left:14px}.fleche.d{right:14px}
+.fleche:disabled{opacity:.25;cursor:default;scale:1;background:rgba(255,255,255,.92)}
+.pied{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:0 clamp(16px,2vw,28px) 22px;color:#dbe5f2;font-size:.9rem}
+.pied .mono{color:var(--steel-light);white-space:nowrap}
+.texte{padding:clamp(22px,2.6vw,40px);overflow-y:auto;display:flex;flex-direction:column;min-height:0}
+.texte h3{font-size:clamp(1.5rem,2.3vw,2.1rem);font-weight:800;margin:12px 0 6px;padding-right:44px}
+.texte .lieu{color:var(--steel);font-weight:600;font-size:.95rem}
+.texte p.desc{color:var(--body);margin:18px 0 20px;font-size:1rem}
+.texte dl{display:grid;grid-template-columns:auto 1fr;gap:0 18px;font-size:.92rem;border-top:1px solid var(--line)}
+.texte dt,.texte dd{padding:10px 0;border-bottom:1px solid var(--line)}
+.texte dd{color:var(--marine-deep);font-weight:600}
+.vignettes{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:22px 0}
+.vignettes button{border:0;padding:0;aspect-ratio:1;border-radius:3px;overflow:hidden;cursor:pointer;opacity:.5;outline:2px solid transparent;outline-offset:1px;transition:opacity .3s,outline-color .3s;background:var(--sky)}
+.vignettes button:hover{opacity:.85}
+.vignettes button.ici{opacity:1;outline-color:var(--amber)}
+.texte .btn{margin-top:auto;align-self:flex-start}
+.fermer{position:absolute;top:14px;right:14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--sky);color:var(--marine-deep);font-size:1.2rem;cursor:pointer;transition:background .3s,rotate .4s var(--ease)}
+.fermer:hover{background:var(--amber);rotate:90deg}
+
 /* sur ordinateur, la galerie avance pendant qu'on descend */
 .galerie.epingle{height:210vh;padding:0}
 .galerie.epingle .fixe{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
@@ -240,6 +278,13 @@ footer .bas{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 3
   .valeurs .wrap{grid-template-columns:1fr}
   .valeur{border-left:0;border-top:1px solid var(--line);padding:22px 0}
   .valeur:first-child{border-top:0;padding-top:0}
+  .fiche{width:100vw;height:100svh;border-radius:0}
+  .fiche[open]{display:block;overflow-y:auto}
+  .scene{height:52svh}
+  .fleche{display:none}
+  .fermer{position:fixed;background:rgba(255,255,255,.94)}
+  .texte{overflow:visible;padding-bottom:36px}
+  .texte .btn{margin-top:8px}
   footer .haut{grid-template-columns:1fr}
   footer{padding-bottom:96px}
   .appel{display:block;position:fixed;left:12px;right:12px;bottom:12px;z-index:35;text-align:center;background:var(--amber);color:var(--marine-deep);font-weight:700;padding:15px;border-radius:999px;box-shadow:0 14px 30px -14px rgba(20,36,61,.7)}
@@ -403,12 +448,12 @@ footer .bas{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 3
       </div>
     </div>
     <div class="piste" id="piste">
-      <figure class="vue"><img src="assets/site/chantier-1.jpg" width="700" height="930" loading="lazy" alt="Bâtiment public habillé d'un bardage terre cuite à claire-voie"><figcaption><span class="mono">Bâtiment public · Bardage</span><b>Équipement terre cuite</b><small>Île-de-France · 2025</small></figcaption></figure>
-      <figure class="vue"><img src="assets/site/chantier-2.jpg" width="700" height="930" loading="lazy" alt="Façade terre cuite vue large bâtiment public"><figcaption><span class="mono">Équipement · Bardage architectural</span><b>Halle couverte</b><small>Île-de-France · 2025</small></figcaption></figure>
-      <figure class="vue"><img src="assets/site/chantier-3.jpg" width="700" height="933" loading="lazy" alt="Façade gris et blanc rénovée bâtiment commercial"><figcaption><span class="mono">Ravalement · Tertiaire</span><b>Façade commerciale</b><small>Île-de-France · 2024</small></figcaption></figure>
-      <figure class="vue large"><img src="assets/site/chantier-4.jpg" width="700" height="525" loading="lazy" alt="Façade architecturale combinant panneaux ajourés et bardage métallique noir"><figcaption><span class="mono">Habillage architectural · Métal</span><b>Façade mixte</b><small>Île-de-France · 2024</small></figcaption></figure>
-      <figure class="vue"><img src="assets/site/chantier-5.jpg" width="700" height="933" loading="lazy" alt="Façade ravalée en pied d'église avec clocher en arrière-plan"><figcaption><span class="mono">Patrimoine · Ravalement</span><b>Cœur de bourg</b><small>Île-de-France · 2024</small></figcaption></figure>
-      <figure class="vue"><img src="assets/site/chantier-6.jpg" width="700" height="933" loading="lazy" alt="Intérieur de halle avec structure métallique et bardage terre cuite en cours de pose"><figcaption><span class="mono">Équipement public · Bardage</span><b>Halle en finition</b><small>Île-de-France · 2025</small></figcaption></figure>
+      <figure class="vue"><img src="assets/site/chantier-1.jpg" width="700" height="930" loading="lazy" alt="Bâtiment public habillé d'un bardage terre cuite à claire-voie"><figcaption><span class="mono">Bâtiment public · Bardage</span><b>Équipement terre cuite</b><small>Île-de-France · 2025</small></figcaption><button class="ouvrir" type="button" data-c="villeneuve" data-p="0" aria-label="Voir le chantier : Équipement terre cuite"><span>Voir le chantier</span></button></figure>
+      <figure class="vue"><img src="assets/site/chantier-2.jpg" width="700" height="930" loading="lazy" alt="Façade terre cuite vue large bâtiment public"><figcaption><span class="mono">Équipement · Bardage architectural</span><b>Halle couverte</b><small>Île-de-France · 2025</small></figcaption><button class="ouvrir" type="button" data-c="villeneuve" data-p="1" aria-label="Voir le chantier : Halle couverte"><span>Voir le chantier</span></button></figure>
+      <figure class="vue"><img src="assets/site/chantier-3.jpg" width="700" height="933" loading="lazy" alt="Façade gris et blanc rénovée bâtiment commercial"><figcaption><span class="mono">Ravalement · Tertiaire</span><b>Façade commerciale</b><small>Île-de-France · 2024</small></figcaption><button class="ouvrir" type="button" data-c="blagis" data-p="0" aria-label="Voir le chantier : Façade commerciale"><span>Voir le chantier</span></button></figure>
+      <figure class="vue large"><img src="assets/site/chantier-4.jpg" width="700" height="525" loading="lazy" alt="Façade architecturale combinant panneaux ajourés et bardage métallique noir"><figcaption><span class="mono">Habillage architectural · Métal</span><b>Façade mixte</b><small>Île-de-France · 2024</small></figcaption><button class="ouvrir" type="button" data-c="epinay" data-p="0" aria-label="Voir le chantier : Façade mixte"><span>Voir le chantier</span></button></figure>
+      <figure class="vue"><img src="assets/site/chantier-5.jpg" width="700" height="933" loading="lazy" alt="Façade ravalée en pied d'église avec clocher en arrière-plan"><figcaption><span class="mono">Patrimoine · Ravalement</span><b>Cœur de bourg</b><small>Île-de-France · 2024</small></figcaption><button class="ouvrir" type="button" data-c="blagis" data-p="1" aria-label="Voir le chantier : Cœur de bourg"><span>Voir le chantier</span></button></figure>
+      <figure class="vue"><img src="assets/site/chantier-6.jpg" width="700" height="933" loading="lazy" alt="Intérieur de halle avec structure métallique et bardage terre cuite en cours de pose"><figcaption><span class="mono">Équipement public · Bardage</span><b>Halle en finition</b><small>Île-de-France · 2025</small></figcaption><button class="ouvrir" type="button" data-c="villeneuve" data-p="2" aria-label="Voir le chantier : Halle en finition"><span>Voir le chantier</span></button></figure>
     </div>
     <div class="jauge" aria-hidden="true"><i></i></div>
   </div>
@@ -496,6 +541,25 @@ footer .bas{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 3
   </div>
 </footer>
 
+<dialog class="fiche" id="fiche" aria-labelledby="fiche-titre">
+  <button class="fermer" type="button" aria-label="Fermer">×</button>
+  <div class="scene">
+    <div class="bande" id="bande" tabindex="0" aria-label="Photos du chantier"></div>
+    <button class="fleche g" type="button" aria-label="Photo précédente">←</button>
+    <button class="fleche d" type="button" aria-label="Photo suivante">→</button>
+    <div class="pied"><span id="legende"></span><span class="mono" id="compteur"></span></div>
+  </div>
+  <div class="texte">
+    <span class="mono" id="fiche-tag"></span>
+    <h3 id="fiche-titre"></h3>
+    <span class="lieu" id="fiche-lieu"></span>
+    <p class="desc" id="fiche-desc"></p>
+    <dl id="fiche-dl"></dl>
+    <div class="vignettes" id="vignettes"></div>
+    <a href="#contact" class="btn" id="fiche-cta">Un projet similaire ? <i>→</i></a>
+  </div>
+</dialog>
+
 <a href="tel:0658428847" class="appel">Appeler 06 58 42 88 47</a>
 
 <script>
@@ -541,6 +605,55 @@ const large=matchMedia('(min-width:961px) and (hover:hover)');
 const epingle=()=>galerie.classList.toggle('epingle',large.matches&&!calme);
 large.addEventListener('change',()=>{epingle();piste.style.transform='';image()});
 piste.addEventListener('scroll',()=>{if(!galerie.classList.contains('epingle'))galerie.style.setProperty('--g',(piste.scrollLeft/Math.max(1,piste.scrollWidth-piste.clientWidth)).toFixed(3))},{passive:true});
+
+// fiches chantier : photos supplémentaires et description
+const CHANTIERS={
+  villeneuve:{tag:'Équipement public · Bardage bois et céramique',titre:'Halle de marché',lieu:'Villeneuve-la-Garenne (92)',
+    desc:"Habillage d'une halle de marché. À l'intérieur, pose de céramique en partie basse et de bois en partie haute ; à l'extérieur, pose de céramique.",
+    dl:[['Ouvrage','Halle de marché'],['Lieu','Villeneuve-la-Garenne'],['Système','Bardage bois et céramique']],
+    photos:[['site/chantier-1.jpg',"Façade extérieure habillée"],['site/chantier-2.jpg',"Vue large de la façade"],['site/chantier-6.jpg',"Intérieur de la halle en finition"],
+      ['chantiers/villeneuve-1.jpg',"Vue d'ensemble de la halle"],['chantiers/villeneuve-2.jpg',"Bardage posé le long de la halle"],['chantiers/villeneuve-3.jpg',"Pose des lames en cours"],
+      ['chantiers/villeneuve-4.jpg',"Premières lames sur l'ossature"],['chantiers/villeneuve-5.jpg',"Extérieur avant habillage"],['chantiers/villeneuve-6.jpg',"Ossature en attente du bardage"]]},
+  blagis:{tag:'Rénovation · Bardage Carrea et enduit',titre:'Centre commercial des Blagis',lieu:'Sceaux (92)',
+    desc:"Rénovation des façades du centre commercial des Blagis : pose d'un bardage Carrea sur ossature, complétée par un enduit.",
+    dl:[['Ouvrage','Centre commercial'],['Lieu','Sceaux'],['Système','Bardage Carrea + enduit']],
+    photos:[['site/chantier-3.jpg',"Façade rénovée, côté rue"],['site/chantier-5.jpg',"Façade rénovée au pied de l'église"],['chantiers/blagis-1.jpg',"Vue d'ensemble après travaux"],
+      ['chantiers/blagis-2.jpg',"Volume habillé et enduit"],['chantiers/blagis-3.jpg',"Raccord entre enduit et bardage"],['chantiers/blagis-4.jpg',"Panneaux posés"],
+      ['chantiers/blagis-5.jpg',"Pose des panneaux sur ossature"],['chantiers/blagis-6.jpg',"Isolant et ossature avant bardage"]]},
+  epinay:{tag:'Extension et rénovation · Bardage Beewod',titre:'Collège Évariste Galois',lieu:'Épinay-sur-Seine (93)',
+    desc:"Intervention sur l'extension et la rénovation du collège Évariste Galois : pose de bardages Beewod en façade.",
+    dl:[['Ouvrage','Collège'],['Lieu','Épinay-sur-Seine'],['Système','Bardage Beewod']],
+    photos:[['site/chantier-4.jpg',"Panneaux ajourés et bardage à lames"],['chantiers/epinay-1.jpg',"Façade en bardage à lames"],['chantiers/epinay-2.jpg',"Détail des lames verticales"],
+      ['chantiers/epinay-3.jpg',"Vue depuis la rue"],['chantiers/epinay-4.jpg',"Échafaudage et isolation en cours"],['chantiers/epinay-5.jpg',"Isolant posé avant bardage"]]}
+};
+const fiche=$('#fiche'),bande=$('#bande'),vignettes=$('#vignettes'),flG=$('.fleche.g'),flD=$('.fleche.d');
+let courant=null,ici=0;
+const nn=n=>String(n).padStart(2,'0');
+function montre(i){
+  ici=i;const ph=courant.photos;
+  $('#legende').textContent=ph[i][1];$('#compteur').textContent=nn(i+1)+' / '+nn(ph.length);
+  [...vignettes.children].forEach((v,k)=>v.classList.toggle('ici',k===i));
+  flG.disabled=i===0;flD.disabled=i===ph.length-1;
+}
+const va=(i,doux=true)=>bande.scrollTo({left:i*bande.clientWidth,behavior:doux&&!calme?'smooth':'instant'});
+function ouvre(c,p){
+  courant=CHANTIERS[c];
+  $('#fiche-tag').textContent=courant.tag;$('#fiche-titre').textContent=courant.titre;$('#fiche-lieu').textContent=courant.lieu;$('#fiche-desc').textContent=courant.desc;
+  $('#fiche-dl').innerHTML=courant.dl.map(([k,v])=>`<dt class="mono">${k}</dt><dd>${v}</dd>`).join('');
+  bande.innerHTML=courant.photos.map(([f,a])=>`<figure><img src="assets/${f}" alt="${a} — ${courant.titre}, ${courant.lieu}" loading="lazy"></figure>`).join('');
+  vignettes.innerHTML=courant.photos.map(([f,a],i)=>`<button type="button" aria-label="Photo ${i+1} : ${a}"><img src="assets/${f}" alt="" loading="lazy"></button>`).join('');
+  fiche.showModal();document.documentElement.classList.add('fige');
+  va(p,false);montre(p);
+}
+$$('.ouvrir').forEach(b=>b.addEventListener('click',()=>ouvre(b.dataset.c,+b.dataset.p)));
+bande.addEventListener('scroll',()=>{const i=Math.round(bande.scrollLeft/bande.clientWidth);if(i!==ici&&courant&&courant.photos[i])montre(i)},{passive:true});
+flG.addEventListener('click',()=>va(ici-1));flD.addEventListener('click',()=>va(ici+1));
+vignettes.addEventListener('click',e=>{const b=e.target.closest('button');if(b)va([...vignettes.children].indexOf(b))});
+fiche.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&ici>0){e.preventDefault();va(ici-1)}if(e.key==='ArrowRight'&&ici<courant.photos.length-1){e.preventDefault();va(ici+1)}});
+fiche.addEventListener('click',e=>{if(e.target===fiche)fiche.close()});
+$('.fermer').addEventListener('click',()=>fiche.close());
+$('#fiche-cta').addEventListener('click',()=>fiche.close());
+fiche.addEventListener('close',()=>document.documentElement.classList.remove('fige'));
 
 const etapes=$('#etapes'),pas=[...etapes.querySelectorAll('.etape')];
 let avant=0,enCours=false;
